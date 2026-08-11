@@ -1,736 +1,495 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Bukti Pakai · Ruang Multimedia</title>
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23A855F7'/%3E%3Cstop offset='100%25' stop-color='%23EC4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230F0B1E'/%3E%3Crect x='12' y='20' width='40' height='30' rx='6' fill='url(%23g)'/%3E%3Cpath d='M24 20l4-6h8l4 6' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='35' r='9' fill='%230F0B1E'/%3E%3Ccircle cx='32' cy='35' r='5.5' fill='%2322D3EE'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0F0B1E;
-      --bg-2: #170F2E;
-      --surface: #1E1638;
-      --surface-2: #2A2049;
-      --line: #332863;
-      --accent-1: #A855F7;
-      --accent-2: #EC4899;
-      --accent-3: #FB923C;
-      --cyan: #22D3EE;
-      --success: #4ADE80;
-      --text: #F5F3FF;
-      --text-dim: #B8AED9;
-      --radius: 24px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at 15% -10%, rgba(168, 85, 247, .35), transparent 45%),
-        radial-gradient(circle at 90% 10%, rgba(236, 72, 153, .28), transparent 40%),
-        radial-gradient(circle at 50% 100%, rgba(34, 211, 238, .15), transparent 45%),
-        var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-      padding-bottom: 60px;
-      overflow-x: hidden;
-    }
-
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: .35;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .blob1 {
-      width: 280px;
-      height: 280px;
-      background: var(--accent-1);
-      top: -80px;
-      left: -100px;
-      animation: float1 14s ease-in-out infinite;
-    }
-
-    .blob2 {
-      width: 220px;
-      height: 220px;
-      background: var(--accent-3);
-      bottom: 10%;
-      right: -80px;
-      animation: float2 16s ease-in-out infinite;
-    }
-
-    @keyframes float1 {
-
-      0%,
-      100% {
-        transform: translate(0, 0);
-      }
-
-      50% {
-        transform: translate(40px, 60px);
-      }
-    }
-
-    @keyframes float2 {
-
-      0%,
-      100% {
-        transform: translate(0, 0);
-      }
-
-      50% {
-        transform: translate(-30px, -40px);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      .blob1,
-      .blob2 {
-        animation: none;
-      }
-
-      * {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-
-    .wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 460px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 0 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: .06em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    .topbar .dot {
-      color: var(--success);
-    }
-
-    #clock {
-      font-variant-numeric: tabular-nums;
-    }
-
-    .hero {
-      padding: 18px 0 8px;
-    }
-
-    .eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--cyan);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    h1 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 32px;
-      line-height: 1.08;
-      margin: 10px 0 8px;
-      font-weight: 700;
-    }
-
-    h1 .grad {
-      background: linear-gradient(90deg, var(--accent-1), var(--accent-2) 55%, var(--accent-3));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .sub {
-      color: var(--text-dim);
-      font-size: 14.5px;
-      line-height: 1.5;
-      margin: 0 0 26px;
-    }
-
-    /* capture zone */
-    .capture-card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px 20px;
-      text-align: center;
-      transition: border-color .2s;
-    }
-
-    .capture-blob {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 16px;
-      border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%;
-      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 0 0 0 rgba(236, 72, 153, .5);
-      animation: pulse 2.4s ease-in-out infinite;
-      transition: transform .15s ease;
-      border: none;
-    }
-
-    .capture-blob:active {
-      transform: scale(.93);
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(236, 72, 153, .35);
-      }
-
-      70% {
-        box-shadow: 0 0 0 18px rgba(236, 72, 153, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
-      }
-    }
-
-    .capture-blob svg {
-      width: 44px;
-      height: 44px;
-    }
-
-    .capture-card p.hint {
-      font-weight: 600;
-      font-size: 15px;
-      margin: 4px 0 4px;
-    }
-
-    .capture-card p.hint2 {
-      color: var(--text-dim);
-      font-size: 13px;
-      margin: 0;
-    }
-
-    #fileInput {
-      display: none;
-    }
-
-    /* polaroid preview */
-    .polaroid-zone {
-      display: none;
-      margin: 22px 0;
-    }
-
-    .polaroid {
-      background: #fdfaf3;
-      padding: 12px 12px 46px;
-      border-radius: 6px;
-      transform: rotate(-3deg);
-      box-shadow: 0 18px 34px rgba(0, 0, 0, .45);
-      position: relative;
-      max-width: 280px;
-      margin: 0 auto;
-      transition: transform .3s;
-    }
-
-    .polaroid img {
-      width: 100%;
-      display: block;
-      border-radius: 2px;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      background: #000;
-    }
-
-    .polaroid .cap {
-      position: absolute;
-      bottom: 8px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-family: 'Caveat', cursive;
-      font-size: 20px;
-      color: #2a2340;
-      font-weight: 700;
-    }
-
-    .retake {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--surface-2);
-      border: 1px solid var(--line);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    /* form */
-    .form-zone {
-      display: none;
-      margin-top: 22px;
-      animation: slideUp .35s ease;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(16px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .autofill-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .autofill-chip {
-      flex: 1;
-      background: var(--surface-2);
-      border: 1px dashed var(--line);
-      border-radius: 14px;
-      padding: 10px 12px;
-    }
-
-    .af-label {
-      display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10.5px;
-      color: var(--text-dim);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      margin-bottom: 3px;
-    }
-
-    .af-value {
-      display: block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13.5px;
-      color: var(--cyan);
-      font-weight: 500;
-    }
-
-    .field {
-      margin-bottom: 14px;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 6px;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 13px 14px;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      outline: none;
-      transition: border-color .15s;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    .field select {
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9'><path d='M1 1l6 6 6-6' stroke='%23B8AED9' stroke-width='2' fill='none' fill-rule='evenodd'/></svg>");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-    }
-
-    .field textarea {
-      resize: none;
-      min-height: 70px;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus {
-      border-color: var(--accent-2);
-    }
-
-    .submit-btn {
-      width: 100%;
-      border: none;
-      border-radius: 16px;
-      padding: 16px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 16px;
-      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-      color: #fff;
-      cursor: pointer;
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: transform .12s;
-    }
-
-    .submit-btn:active {
-      transform: scale(.98);
-    }
-
-    .submit-btn:disabled {
-      opacity: .6;
-    }
-
-    .spinner {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, .4);
-      border-top-color: #fff;
-      animation: spin .7s linear infinite;
-      display: none;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* success */
-    .success-zone {
-      display: none;
-      text-align: center;
-      padding: 50px 10px 20px;
-    }
-
-    .success-emoji {
-      font-size: 52px;
-      animation: pop .5s ease;
-    }
-
-    @keyframes pop {
-      0% {
-        transform: scale(0);
-      }
-
-      70% {
-        transform: scale(1.15);
-      }
-
-      100% {
-        transform: scale(1);
-      }
-    }
-
-    .success-zone h2 {
-      font-family: 'Space Grotesk', sans-serif;
-      margin: 14px 0 6px;
-      font-size: 22px;
-    }
-
-    .success-zone p {
-      color: var(--text-dim);
-      font-size: 14px;
-      margin: 0 0 22px;
-    }
-
-    .again-btn {
-      border: 1px solid var(--line);
-      background: var(--surface);
-      color: var(--text);
-      border-radius: 14px;
-      padding: 12px 22px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .footer-note {
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 11px;
-      font-family: 'JetBrains Mono', monospace;
-      margin-top: 34px;
-      letter-spacing: .03em;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bukti Pakai · Ruang Multimedia</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23A855F7'/%3E%3Cstop offset='100%25' stop-color='%23EC4899'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230F0B1E'/%3E%3Crect x='12' y='20' width='40' height='30' rx='6' fill='url(%23g)'/%3E%3Cpath d='M24 20l4-6h8l4 6' fill='none' stroke='url(%23g)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='35' r='9' fill='%230F0B1E'/%3E%3Ccircle cx='32' cy='35' r='5.5' fill='%2322D3EE'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F0B1E;
+    --bg-2:#170F2E;
+    --surface:#1E1638;
+    --surface-2:#2A2049;
+    --line:#332863;
+    --accent-1:#A855F7;
+    --accent-2:#EC4899;
+    --accent-3:#FB923C;
+    --cyan:#22D3EE;
+    --success:#4ADE80;
+    --text:#F5F3FF;
+    --text-dim:#B8AED9;
+    --radius:24px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% -10%, rgba(168,85,247,.35), transparent 45%),
+      radial-gradient(circle at 90% 10%, rgba(236,72,153,.28), transparent 40%),
+      radial-gradient(circle at 50% 100%, rgba(34,211,238,.15), transparent 45%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+    overflow-x:hidden;
+  }
+  .blob{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.35;
+    z-index:0;
+    pointer-events:none;
+  }
+  .blob1{width:280px;height:280px;background:var(--accent-1);top:-80px;left:-100px;animation:float1 14s ease-in-out infinite;}
+  .blob2{width:220px;height:220px;background:var(--accent-3);bottom:10%;right:-80px;animation:float2 16s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,60px);}}
+  @keyframes float2{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,-40px);}}
+  @media (prefers-reduced-motion: reduce){
+    .blob1,.blob2{animation:none;}
+    *{animation-duration:.01ms !important; transition-duration:.01ms !important;}
+  }
+
+  .wrap{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:0 20px;}
+
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 0 8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.06em;
+    color:var(--text-dim);
+    text-transform:uppercase;
+  }
+  .topbar .dot{color:var(--success);}
+  #clock{font-variant-numeric:tabular-nums;}
+
+  .hero{padding:18px 0 8px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--cyan);
+    letter-spacing:.08em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:32px;line-height:1.08;
+    margin:10px 0 8px;
+    font-weight:700;
+  }
+  h1 .grad{
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2) 55%,var(--accent-3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{color:var(--text-dim);font-size:14.5px;line-height:1.5;margin:0 0 26px;}
+
+  /* capture zone */
+  .capture-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 20px;
+    text-align:center;
+    transition:border-color .2s;
+  }
+  .capture-blob{
+    width:120px;height:120px;margin:0 auto 16px;
+    border-radius:42% 58% 63% 37% / 45% 40% 60% 55%;
+    background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    box-shadow:0 0 0 0 rgba(236,72,153,.5);
+    animation:pulse 2.4s ease-in-out infinite;
+    transition:transform .15s ease;
+    border:none;
+  }
+  .capture-blob:active{transform:scale(.93);}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(236,72,153,.35);}
+    70%{box-shadow:0 0 0 18px rgba(236,72,153,0);}
+    100%{box-shadow:0 0 0 0 rgba(236,72,153,0);}
+  }
+  .capture-blob svg{width:44px;height:44px;}
+  .capture-card p.hint{
+    font-weight:600;font-size:15px;margin:4px 0 4px;
+  }
+  .capture-card p.hint2{
+    color:var(--text-dim);font-size:13px;margin:0;
+  }
+  #fileInput{display:none;}
+  #fileInputGallery{display:none;}
+
+  .gallery-btn{
+    margin-top:16px;
+    background:none;border:1px solid var(--line);
+    color:var(--text-dim);border-radius:12px;
+    padding:10px 16px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:7px;
+    cursor:pointer;transition:border-color .15s, color .15s;
+  }
+  .gallery-btn svg{width:16px;height:16px;}
+  .gallery-btn:active{border-color:var(--accent-2);color:var(--text);}
+
+  /* polaroid preview */
+  .polaroid-zone{display:none;margin:22px 0;}
+  .polaroid{
+    background:#fdfaf3;
+    padding:12px 12px 46px;
+    border-radius:6px;
+    transform:rotate(-3deg);
+    box-shadow:0 18px 34px rgba(0,0,0,.45);
+    position:relative;
+    max-width:280px;
+    margin:0 auto;
+    transition:transform .3s;
+  }
+  .polaroid img{
+    width:100%;display:block;border-radius:2px;
+    aspect-ratio:1/1;object-fit:cover;background:#000;
+  }
+  .polaroid .cap{
+    position:absolute;bottom:8px;left:0;right:0;text-align:center;
+    font-family:'Caveat',cursive;font-size:20px;color:#2a2340;font-weight:700;
+  }
+  .retake{
+    position:absolute;top:-10px;right:-10px;
+    width:32px;height:32px;border-radius:50%;
+    background:var(--surface-2);border:1px solid var(--line);
+    color:var(--text);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:16px;
+  }
+
+  /* form */
+  .form-zone{display:none;margin-top:22px;animation:slideUp .35s ease;}
+  @keyframes slideUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  .autofill-row{display:flex;gap:10px;margin-bottom:18px;}
+  .autofill-chip{
+    flex:1;background:var(--surface-2);border:1px dashed var(--line);
+    border-radius:14px;padding:10px 12px;
+  }
+  .af-label{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    color:var(--text-dim);letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px;
+  }
+  .af-value{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:13.5px;
+    color:var(--cyan);font-weight:500;
+  }
+  .af-input{
+    width:100%;background:transparent;border:none;
+    font-family:'JetBrains Mono',monospace;font-size:13.5px;
+    color:var(--cyan);font-weight:500;padding:0;outline:none;
+    -webkit-appearance:none;appearance:none;
+    color-scheme:dark;
+  }
+  .autofill-hint{
+    font-size:12px;color:var(--text-dim);margin:-10px 0 18px;line-height:1.4;
+  }
+
+  .field{margin-bottom:14px;}
+  .field label{
+    display:block;font-size:12px;font-family:'JetBrains Mono',monospace;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);
+    margin-bottom:6px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%;background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:13px 14px;color:var(--text);font-family:'Inter',sans-serif;
+    font-size:15px;outline:none;transition:border-color .15s;
+    -webkit-appearance:none;appearance:none;
+  }
+  .field select{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9'><path d='M1 1l6 6 6-6' stroke='%23B8AED9' stroke-width='2' fill='none' fill-rule='evenodd'/></svg>");
+    background-repeat:no-repeat;background-position:right 14px center;
+  }
+  .field textarea{resize:none;min-height:70px;font-family:'Inter',sans-serif;}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--accent-2);}
+
+  .submit-btn{
+    width:100%;border:none;border-radius:16px;padding:16px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;
+    background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    color:#fff;cursor:pointer;margin-top:6px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    transition:transform .12s;
+  }
+  .submit-btn:active{transform:scale(.98);}
+  .submit-btn:disabled{opacity:.6;}
+  .spinner{
+    width:16px;height:16px;border-radius:50%;
+    border:2px solid rgba(255,255,255,.4);border-top-color:#fff;
+    animation:spin .7s linear infinite;display:none;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* success */
+  .success-zone{display:none;text-align:center;padding:50px 10px 20px;}
+  .success-emoji{font-size:52px;animation:pop .5s ease;}
+  @keyframes pop{0%{transform:scale(0);}70%{transform:scale(1.15);}100%{transform:scale(1);}}
+  .success-zone h2{font-family:'Space Grotesk',sans-serif;margin:14px 0 6px;font-size:22px;}
+  .success-zone p{color:var(--text-dim);font-size:14px;margin:0 0 22px;}
+  .again-btn{
+    border:1px solid var(--line);background:var(--surface);color:var(--text);
+    border-radius:14px;padding:12px 22px;font-family:'Inter',sans-serif;font-weight:600;
+    cursor:pointer;font-size:14px;
+  }
+
+  .footer-note{
+    text-align:center;color:var(--text-dim);font-size:11px;
+    font-family:'JetBrains Mono',monospace;margin-top:34px;letter-spacing:.03em;
+  }
+</style>
 </head>
-
 <body>
 
-  <div class="blob blob1"></div>
-  <div class="blob blob2"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
 
-  <div class="wrap">
-    <div class="topbar">
-      <span><span class="dot">●</span> RUANG Lab</span>
-      <span id="clock">--:--</span>
-    </div>
-
-    <div class="hero">
-      <span class="eyebrow">✦ evidence check-in</span>
-      <h1>Udah pake<br><span class="grad">ruangannya?</span> Jepret dulu 📸</h1>
-      <p class="sub">foto, isi, bukti peminjaman langsung tersimpan ke sistem sekolah.</p>
-    </div>
-
-    <form id="captureForm">
-      <div class="capture-card" id="captureCard">
-        <button type="button" class="capture-blob" id="captureBtn" aria-label="Ambil foto">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
-            <path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" />
-            <circle cx="12" cy="13" r="3.4" />
-          </svg>
-        </button>
-        <p class="hint">Tap buat jepret / upload</p>
-        <p class="hint2">Evidence otomatis nempel + tanggal & waktu auto-fill</p>
-        <input type="file" id="fileInput" accept="image/*" capture="environment">
-      </div>
-
-      <div class="polaroid-zone" id="polaroidZone">
-        <div class="polaroid">
-          <img id="previewImg" src="" alt="preview">
-          <div class="cap" id="capTime"></div>
-          <div class="retake" id="retakeBtn">✕</div>
-        </div>
-      </div>
-
-      <div class="form-zone" id="formZone">
-        <div class="autofill-row">
-          <div class="autofill-chip">
-            <span class="af-label">📅 Tanggal</span>
-            <span class="af-value" id="afTanggal">-</span>
-          </div>
-          <div class="autofill-chip">
-            <span class="af-label">🕐 Waktu</span>
-            <span class="af-value" id="afWaktu">-</span>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="judul">Judul Kegiatan</label>
-          <input type="text" id="judul" name="judul" placeholder="cth. Editing Video Kelas XI" required>
-        </div>
-        <div class="field">
-          <label for="deskripsi">Deskripsi Kegiatan</label>
-          <textarea id="deskripsi" name="deskripsi" placeholder="Ceritain singkat kegiatannya" required></textarea>
-        </div>
-        <div class="field">
-          <label for="tempat">Tempat Kegiatan</label>
-          <select id="tempat" name="tempat" required>
-            <option value="" disabled selected>Pilih ruangan</option>
-            <option>Lab Biologi/Kimia</option>
-            <option>Lab Fisika/SMC</option>
-            <option>Lab Multimedia/TIK</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="peserta">Peserta Kegiatan</label>
-          <input type="text" id="peserta" name="peserta" placeholder="cth. XI MIPA-SOSIO 4 (36 siswa)" required>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">
-          <span class="spinner" id="spinner"></span>
-          <span id="submitLabel">Kirim Bukti</span>
-        </button>
-      </div>
-    </form>
-
-    <div class="success-zone" id="successZone">
-      <div class="success-emoji">✅</div>
-      <h2>Beres, kesimpen!</h2>
-      <p>Bukti pemakaian ruangan udah masuk ke sistem.</p>
-      <button class="again-btn" id="againBtn">Upload lagi</button>
-    </div>
-
-    <p class="footer-note">SMA TELKOM BANDUNG · EVIDENCE LAB</p>
+<div class="wrap">
+  <div class="topbar">
+    <span><span class="dot">●</span> RUANG MULTIMEDIA</span>
+    <span id="clock">--:--</span>
   </div>
 
+  <div class="hero">
+    <span class="eyebrow">✦ evidence check-in</span>
+    <h1>Udah pake<br><span class="grad">ruangannya?</span> Jepret dulu 📸</h1>
+    <p class="sub">Satu foto, isi dikit, langsung kesimpen ke sistem sekolah. Gaperlu ribet.</p>
+  </div>
 
-  <script>
-    // === GANTI URL INI dengan Web App URL Apps Script kamu ===
-    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzrKHTy4pNoXUDSTGXkMJWZHV-9DibUJmf8tIbzhGsKEF6IixH560z1ieIDYlH4kkq0pQ/exec";
+  <form id="captureForm">
+    <div class="capture-card" id="captureCard">
+      <button type="button" class="capture-blob" id="captureBtn" aria-label="Ambil foto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8">
+          <path d="M4 8a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z"/>
+          <circle cx="12" cy="13" r="3.4"/>
+        </svg>
+      </button>
+      <p class="hint">Tap buat jepret</p>
+      <p class="hint2">Evidence otomatis nempel + tanggal & waktu auto-fill</p>
 
-    const clockEl = document.getElementById('clock');
-    function tick() {
-      const d = new Date();
-      clockEl.textContent = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+      <button type="button" class="gallery-btn" id="galleryBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="4" width="18" height="16" rx="3"/>
+          <circle cx="8.5" cy="9.5" r="1.5"/>
+          <path d="M21 16l-5.5-5.5a2 2 0 0 0-2.8 0L3 20"/>
+        </svg>
+        Atau upload dari galeri
+      </button>
+
+      <input type="file" id="fileInput" accept="image/*" capture="environment">
+      <input type="file" id="fileInputGallery" accept="image/*">
+    </div>
+
+    <div class="polaroid-zone" id="polaroidZone">
+      <div class="polaroid">
+        <img id="previewImg" src="" alt="preview">
+        <div class="cap" id="capTime"></div>
+        <div class="retake" id="retakeBtn">✕</div>
+      </div>
+    </div>
+
+    <div class="form-zone" id="formZone">
+      <div class="autofill-row">
+        <div class="autofill-chip">
+          <span class="af-label">📅 Tanggal</span>
+          <input type="date" class="af-input" id="afTanggal">
+        </div>
+        <div class="autofill-chip">
+          <span class="af-label">🕐 Waktu</span>
+          <input type="time" class="af-input" id="afWaktu">
+        </div>
+      </div>
+      <p class="autofill-hint" id="autofillHint">Otomatis diisi waktu sekarang — tinggal ubah kalau ini dokumentasi kegiatan yang udah lewat 👆</p>
+
+      <div class="field">
+        <label for="judul">Judul Kegiatan</label>
+        <input type="text" id="judul" name="judul" placeholder="cth. Editing Video Kelas XI" required>
+      </div>
+      <div class="field">
+        <label for="deskripsi">Deskripsi Kegiatan</label>
+        <textarea id="deskripsi" name="deskripsi" placeholder="Ceritain singkat kegiatannya" required></textarea>
+      </div>
+      <div class="field">
+        <label for="tempat">Tempat Kegiatan</label>
+        <select id="tempat" name="tempat" required>
+          <option value="" disabled selected>Pilih ruangan</option>
+          <option>Lab Biologi/Kimia</option>
+          <option>Lab Fisika/SMC</option>
+          <option>Lab Multimedia/TIK</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="peserta">Peserta Kegiatan</label>
+        <input type="text" id="peserta" name="peserta" placeholder="cth. XI MIPA-SOSIO 4 (36 siswa)" required>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span class="spinner" id="spinner"></span>
+        <span id="submitLabel">Kirim Bukti</span>
+      </button>
+    </div>
+  </form>
+
+  <div class="success-zone" id="successZone">
+    <div class="success-emoji">✅</div>
+    <h2>Beres, kesimpen!</h2>
+    <p>Bukti pemakaian ruangan udah masuk ke sistem.</p>
+    <button class="again-btn" id="againBtn">Upload lagi</button>
+  </div>
+
+  <p class="footer-note">SMA TELKOM BANDUNG · RUANG MULTIMEDIA LOG</p>
+</div>
+
+
+<script>
+  // === GANTI URL INI dengan Web App URL Apps Script kamu ===
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzrKHTy4pNoXUDSTGXkMJWZHV-9DibUJmf8tIbzhGsKEF6IixH560z1ieIDYlH4kkq0pQ/exec";
+
+  const clockEl = document.getElementById('clock');
+  function tick(){
+    const d = new Date();
+    clockEl.textContent = d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+  }
+  tick(); setInterval(tick, 1000*30);
+
+  const fileInput = document.getElementById('fileInput');
+  const fileInputGallery = document.getElementById('fileInputGallery');
+  const captureBtn = document.getElementById('captureBtn');
+  const galleryBtn = document.getElementById('galleryBtn');
+  const captureCard = document.getElementById('captureCard');
+  const polaroidZone = document.getElementById('polaroidZone');
+  const previewImg = document.getElementById('previewImg');
+  const capTime = document.getElementById('capTime');
+  const formZone = document.getElementById('formZone');
+  const retakeBtn = document.getElementById('retakeBtn');
+  const captureForm = document.getElementById('captureForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('spinner');
+  const submitLabel = document.getElementById('submitLabel');
+  const successZone = document.getElementById('successZone');
+  const againBtn = document.getElementById('againBtn');
+  const afTanggal = document.getElementById('afTanggal');
+  const afWaktu = document.getElementById('afWaktu');
+
+  let photoBase64 = null;
+
+  function isoToTanggalIndo(isoDate){
+    // isoDate: "2026-08-11" -> "11 Agustus 2026"
+    const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const [y,m,d] = isoDate.split('-');
+    return parseInt(d,10) + ' ' + bulan[parseInt(m,10)-1] + ' ' + y;
+  }
+
+  function handleFilePicked(file){
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      photoBase64 = e.target.result;
+      previewImg.src = photoBase64;
+      const now = new Date();
+      capTime.textContent = now.toLocaleString('id-ID',{
+        day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'
+      });
+      // default-nya waktu sekarang, tapi field ini bisa diedit manual
+      // (misal buat upload dokumentasi kegiatan yang udah lewat)
+      const pad = n => String(n).padStart(2,'0');
+      afTanggal.value = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+      afWaktu.value = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+
+      captureCard.style.display = 'none';
+      polaroidZone.style.display = 'block';
+      formZone.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  captureBtn.addEventListener('click', () => fileInput.click());
+  galleryBtn.addEventListener('click', () => fileInputGallery.click());
+
+  fileInput.addEventListener('change', () => handleFilePicked(fileInput.files[0]));
+  fileInputGallery.addEventListener('change', () => handleFilePicked(fileInputGallery.files[0]));
+
+  retakeBtn.addEventListener('click', () => {
+    photoBase64 = null;
+    fileInput.value = '';
+    fileInputGallery.value = '';
+    polaroidZone.style.display = 'none';
+    formZone.style.display = 'none';
+    captureCard.style.display = 'block';
+  });
+
+  captureForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if(!photoBase64){ alert('Foto dulu ya sebelum kirim 📸'); return; }
+    if(!afTanggal.value || !afWaktu.value){ alert('Tanggal & waktu kegiatan belum keisi 📅'); return; }
+    if(WEBAPP_URL.includes('PASTE_URL')){
+      alert('WEBAPP_URL belum diisi. Lihat panduan setup di bawah kode.');
+      return;
     }
-    tick(); setInterval(tick, 1000 * 30);
 
-    const fileInput = document.getElementById('fileInput');
-    const captureBtn = document.getElementById('captureBtn');
-    const captureCard = document.getElementById('captureCard');
-    const polaroidZone = document.getElementById('polaroidZone');
-    const previewImg = document.getElementById('previewImg');
-    const capTime = document.getElementById('capTime');
-    const formZone = document.getElementById('formZone');
-    const retakeBtn = document.getElementById('retakeBtn');
-    const captureForm = document.getElementById('captureForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const spinner = document.getElementById('spinner');
-    const submitLabel = document.getElementById('submitLabel');
-    const successZone = document.getElementById('successZone');
-    const againBtn = document.getElementById('againBtn');
-    const afTanggal = document.getElementById('afTanggal');
-    const afWaktu = document.getElementById('afWaktu');
+    submitBtn.disabled = true;
+    spinner.style.display = 'inline-block';
+    submitLabel.textContent = 'Mengirim...';
 
-    let photoBase64 = null;
-    let tanggalFix = null;
-    let waktuFix = null;
+    const fields = {
+      judul: document.getElementById('judul').value,
+      deskripsi: document.getElementById('deskripsi').value,
+      tanggal: isoToTanggalIndo(afTanggal.value),
+      waktu: afWaktu.value + ' WIB',
+      tempat: document.getElementById('tempat').value,
+      peserta: document.getElementById('peserta').value,
+      foto: photoBase64
+    };
 
-    captureBtn.addEventListener('click', () => fileInput.click());
+    const body = new URLSearchParams(fields);
 
-    fileInput.addEventListener('change', () => {
-      const file = fileInput.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        photoBase64 = e.target.result;
-        previewImg.src = photoBase64;
-        const now = new Date();
-        capTime.textContent = now.toLocaleString('id-ID', {
-          day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
-        });
-        // evidence otomatis "terupload" (terlampir) begitu foto diambil,
-        // dan tanggal/waktu langsung dikunci dari momen ini juga
-        tanggalFix = now.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
-        waktuFix = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
-        afTanggal.textContent = tanggalFix;
-        afWaktu.textContent = waktuFix;
-
-        captureCard.style.display = 'none';
-        polaroidZone.style.display = 'block';
-        formZone.style.display = 'block';
-      };
-      reader.readAsDataURL(file);
-    });
-
-    retakeBtn.addEventListener('click', () => {
-      photoBase64 = null;
-      tanggalFix = null;
-      waktuFix = null;
-      fileInput.value = '';
-      polaroidZone.style.display = 'none';
-      formZone.style.display = 'none';
-      captureCard.style.display = 'block';
-    });
-
-    captureForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!photoBase64) { alert('Foto dulu ya sebelum kirim 📸'); return; }
-      if (WEBAPP_URL.includes('PASTE_URL')) {
-        alert('WEBAPP_URL belum diisi. Lihat panduan setup di bawah kode.');
-        return;
-      }
-
-      submitBtn.disabled = true;
-      spinner.style.display = 'inline-block';
-      submitLabel.textContent = 'Mengirim...';
-
-      const fields = {
-        judul: document.getElementById('judul').value,
-        deskripsi: document.getElementById('deskripsi').value,
-        tanggal: tanggalFix,
-        waktu: waktuFix,
-        tempat: document.getElementById('tempat').value,
-        peserta: document.getElementById('peserta').value,
-        foto: photoBase64
-      };
-
-      const body = new URLSearchParams(fields);
-
-      fetch(WEBAPP_URL, { method: 'POST', body: body })
-        .then(res => res.text())
-        .then(text => {
-          if (text.trim().startsWith('OK')) {
-            captureForm.style.display = 'none';
-            successZone.style.display = 'block';
-          } else {
-            // Apps Script berhasil dihubungi tapi doPost error (misal FOLDER_ID/SHEET_ID salah)
-            alert('Gagal simpan. Pesan dari server:\n\n' + text + '\n\nCek FOLDER_ID / SHEET_ID di Code.gs.');
-            submitBtn.disabled = false;
-            spinner.style.display = 'none';
-            submitLabel.textContent = 'Kirim Bukti';
-          }
-        })
-        .catch(err => {
-          // Biasanya gara-gara CORS/deployment belum benar
-          alert('Gagal kirim ke server: ' + err.message + '\n\nCek: sudah redeploy versi terbaru? "Who has access" = Anyone? URL diakhiri /exec?');
+    fetch(WEBAPP_URL, { method: 'POST', body: body })
+      .then(res => res.text())
+      .then(text => {
+        if (text.trim().startsWith('OK')) {
+          captureForm.style.display = 'none';
+          successZone.style.display = 'block';
+        } else {
+          // Apps Script berhasil dihubungi tapi doPost error (misal FOLDER_ID/SHEET_ID salah)
+          alert('Gagal simpan. Pesan dari server:\n\n' + text + '\n\nCek FOLDER_ID / SHEET_ID di Code.gs.');
           submitBtn.disabled = false;
           spinner.style.display = 'none';
           submitLabel.textContent = 'Kirim Bukti';
-        });
-    });
+        }
+      })
+      .catch(err => {
+        // Biasanya gara-gara CORS/deployment belum benar
+        alert('Gagal kirim ke server: ' + err.message + '\n\nCek: sudah redeploy versi terbaru? "Who has access" = Anyone? URL diakhiri /exec?');
+        submitBtn.disabled = false;
+        spinner.style.display = 'none';
+        submitLabel.textContent = 'Kirim Bukti';
+      });
+  });
 
-    againBtn.addEventListener('click', () => {
-      photoBase64 = null;
-      tanggalFix = null;
-      waktuFix = null;
-      fileInput.value = '';
-      document.getElementById('judul').value = '';
-      document.getElementById('deskripsi').value = '';
-      document.getElementById('tempat').selectedIndex = 0;
-      document.getElementById('peserta').value = '';
-      polaroidZone.style.display = 'none';
-      formZone.style.display = 'none';
-      successZone.style.display = 'none';
-      captureForm.style.display = 'block';
-      captureCard.style.display = 'block';
-      submitBtn.disabled = false;
-      spinner.style.display = 'none';
-      submitLabel.textContent = 'Kirim Bukti';
-    });
-  </script>
+  againBtn.addEventListener('click', () => {
+    photoBase64 = null;
+    fileInput.value = '';
+    fileInputGallery.value = '';
+    afTanggal.value = '';
+    afWaktu.value = '';
+    document.getElementById('judul').value = '';
+    document.getElementById('deskripsi').value = '';
+    document.getElementById('tempat').selectedIndex = 0;
+    document.getElementById('peserta').value = '';
+    polaroidZone.style.display = 'none';
+    formZone.style.display = 'none';
+    successZone.style.display = 'none';
+    captureForm.style.display = 'block';
+    captureCard.style.display = 'block';
+    submitBtn.disabled = false;
+    spinner.style.display = 'none';
+    submitLabel.textContent = 'Kirim Bukti';
+  });
+</script>
 </body>
-
 </html>
